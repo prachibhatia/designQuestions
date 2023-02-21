@@ -50,7 +50,7 @@ public class Game {
     }
 
     public static class Builder{
-        private int dimension;
+        private Board board;
         private List<Player> players;
         private List<Move> moves;
         private Player winner;
@@ -58,8 +58,8 @@ public class Game {
         private int nextPlayerIndex;
         private GameWinningStrategy gameWinningStrategy;
 
-        public Builder setBoardSize(int dimension) {
-            this.dimension = dimension;
+        public Builder setBoard(Board board) {
+            this.board = board;
             return this;
         }
 
