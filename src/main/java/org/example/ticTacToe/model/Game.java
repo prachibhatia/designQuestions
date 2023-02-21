@@ -44,8 +44,13 @@ public class Game {
         this.gameWinningStrategy = gameWinningStrategy;
     }
 
+    public static Builder builder(){
+        Builder b = new Builder();
+        return b;
+    }
+
     public static class Builder{
-        private Board board;
+        private int dimension;
         private List<Player> players;
         private List<Move> moves;
         private Player winner;
@@ -53,8 +58,8 @@ public class Game {
         private int nextPlayerIndex;
         private GameWinningStrategy gameWinningStrategy;
 
-        public Builder setBoard(Board board) {
-            this.board = board;
+        public Builder setBoardSize(int dimension) {
+            this.dimension = dimension;
             return this;
         }
 
@@ -101,12 +106,12 @@ public class Game {
             }
 
             Game game = new Game();
-            game.setBoard(new Board(3));//TODO : take user input
+            game.setBoard(new Board(dimension));//TODO : take user input
             game.setPlayers(players);
             game.setGameStatus(GameState.IN_PROGRESS);
             game.setMoves(new ArrayList<>());
             game.setNextPlayerIndex(0); //TODO : keep the value random from [0 - dimension-2]
-            game.setGameWinningStrategy(null);//TODO: add game winning strategy using factory
+            game.setGameWinningStrategy(gameWinningStrategy);//TODO: add game winning strategy using factory
             return game;
         }
     }
