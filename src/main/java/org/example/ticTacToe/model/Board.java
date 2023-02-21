@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    List<List<Cell>> board;
+    private List<List<Cell>> board;
 
     public Board(int dimension){
         this.board = new ArrayList<>();
@@ -23,10 +23,10 @@ public class Board {
                 } else if(board.get(i).get(j).getCellState().equals(CellState.BLOCKED)){
                     System.out.print("|XXX|");
                 } else {
-                    System.out.println("| " + board.get(i).get(j).getPlayer().getSymbol() + " |");
+                    System.out.print("| " + board.get(i).get(j).getPlayer().getSymbol() + " |");
                 }
             }
-            System.out.println();
+            System.out.println("");
         }
     }
 

@@ -1,6 +1,8 @@
 package org.example.ticTacToe.model;
 
+import org.example.ticTacToe.exception.BoardNotValidException;
 import org.example.ticTacToe.exception.PlayersCountNotValidException;
+import org.example.ticTacToe.factory.GameWinningStrategyFactory;
 import org.example.ticTacToe.strategy.GameWinningStrategy.GameWinningStrategy;
 
 import java.util.ArrayList;
@@ -15,6 +17,17 @@ public class Game {
     private int nextPlayerIndex;
     private GameWinningStrategy gameWinningStrategy;
     private Game() {
+    }
+
+    public void undo(){
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public Player getWinner() {
+        return winner;
     }
 
     public void setBoard(Board board) {
@@ -46,18 +59,42 @@ public class Game {
     }
 
     public static Builder builder(){
-        Builder b = new Builder();
-        return b;
+        return new Builder();
+    }
+
+    public void displayBoard(){
+        board.display();
+    }
+
+    public void makeMove(){
+        Player toMovePlayer = playersList.get(nextPlayerIndex);
+        System.out.println("It is " + toMovePlayer.getName() + "'s turn.");
+        Move move = toMovePlayer.decideMove(board);
+        int row = move.getCell().getRow();
+        int col = move.getCell().getCol();
+
+        System.out.println("Move happened at: " +
+                row + ", " + col + ".");
+
+        board.getBoard().get(row).get(col).setCellState(CellState.OCCUPIED);
+        board.getBoard().get(row).get(col).setPlayer(playersList.get(nextPlayerIndex));
+
+        this.moves.add(move);
+
+        if (gameWinningStrategy.checkWinner(
+                board, toMovePlayer, move.getCell()
+        )) {
+            gameState = GameState.ENDED;
+            winner = toMovePlayer;
+        }
+
+        nextPlayerIndex += 1;
+        nextPlayerIndex %= playersList.size();
     }
 
     public static class Builder{
         private Board board;
         private List<Player> players;
-        private List<Move> moves;
-        private Player winner;
-        private GameState gameState;
-        private int nextPlayerIndex;
-        private GameWinningStrategy gameWinningStrategy;
 
         public Builder setBoard(Board board) {
             this.board = board;
@@ -69,33 +106,12 @@ public class Game {
             return this;
         }
 
-        public Builder setMoves(List<Move> moves) {
-            this.moves = moves;
-            return this;
-        }
-
-        public Builder setWinner(Player winner) {
-            this.winner = winner;
-            return this;
-        }
-
-        public Builder setGameStatus(GameState gameState) {
-            this.gameState = gameState;
-            return this;
-        }
-
-        public Builder setNextPlayerIndex(int nextPlayerIndex) {
-            this.nextPlayerIndex = nextPlayerIndex;
-            return this;
-        }
-
-        public Builder setGameWinningStrategy(GameWinningStrategy gameWinningStrategy) {
-            this.gameWinningStrategy = gameWinningStrategy;
-            return this;
-        }
 
         private boolean valid(){
-            if(players.size()-1!=board.getBoard().size()){
+            if(board.getBoard().size()<3){
+                throw new BoardNotValidException("Board dimensions are not valid");
+            }
+            if(players.size()!=board.getBoard().size()-1){
                 throw new PlayersCountNotValidException("Count of players mismatched");
             }
             return true;
@@ -113,8 +129,8 @@ public class Game {
             game.setPlayers(players);
             game.setGameStatus(GameState.IN_PROGRESS);
             game.setMoves(new ArrayList<>());
-            game.setNextPlayerIndex(0); //TODO : keep the value random from [0 - dimension-2]
-            game.setGameWinningStrategy(gameWinningStrategy);//TODO: add game winning strategy using factory
+            game.setNextPlayerIndex(0);
+            game.setGameWinningStrategy(GameWinningStrategyFactory.getWinningStrategy());
             return game;
         }
     }

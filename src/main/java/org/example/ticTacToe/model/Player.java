@@ -27,6 +27,12 @@ public class Player {
         if(row<0 && row>size && col<0 && col>size){
             throw new MoveNotValidException("This move is not valid");
         }
+        if(board.getBoard().get(row).get(col).getCellState()==CellState.OCCUPIED){
+            throw new MoveNotValidException("This move is not valid");
+        }
+        if(board.getBoard().get(row).get(col).getCellState()==CellState.BLOCKED){
+            throw new MoveNotValidException("This move is not valid");
+        }
         return new Move(this, new Cell(row, col));
     }
 
