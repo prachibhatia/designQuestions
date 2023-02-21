@@ -1,5 +1,6 @@
 package org.example.ticTacToe.model;
 
+import org.example.ticTacToe.exception.PlayersCountNotValidException;
 import org.example.ticTacToe.strategy.GameWinningStrategy.GameWinningStrategy;
 
 import java.util.ArrayList;
@@ -94,7 +95,9 @@ public class Game {
         }
 
         private boolean valid(){
-            //TODO: add validations and throw custom exceptions if not valid
+            if(players.size()-1!=board.getBoard().size()){
+                throw new PlayersCountNotValidException("Count of players mismatched");
+            }
             return true;
         }
 
@@ -102,11 +105,11 @@ public class Game {
             try{
                 valid();
             } catch (Exception e){
-                //TODO:handle the exception thrown
+                System.out.println(e.getMessage());
             }
 
             Game game = new Game();
-            game.setBoard(new Board(dimension));//TODO : take user input
+            game.setBoard(board);
             game.setPlayers(players);
             game.setGameStatus(GameState.IN_PROGRESS);
             game.setMoves(new ArrayList<>());
