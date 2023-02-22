@@ -14,7 +14,7 @@ public class LinearSlotAllocationStrategy implements SlotAllocationStrategy{
         for(int i=0;i<floors.size();i++){
             List<Slot> slots = floors.get(i).getSlots();
             for(int j=0;j<slots.size();j++){
-                if(slots.get(j).getSlot_status()== Status.EMPTY){
+                if(slots.get(j).getSlot_status()== Status.EMPTY && slots.get(j).getVehicleType()==vehicle.getVehicleType()){
                     return slots.get(j);
                 }
             }
