@@ -1,10 +1,12 @@
 package org.example.parkingLot.model;
 
+import org.example.parkingLot.model.enums.VehicleType;
+
 public class ElectricSlot extends Slot{
     private ElectricMeter electricMeter;
     private Charger charger;
-    public ElectricSlot(int id, int slot_no, VehicleType vehicleType,ElectricMeter electricMeter,Charger charger) {
-        super(id, slot_no, vehicleType);
+    public ElectricSlot(int id, int slot_no, Floor floor, VehicleType vehicleType, ElectricMeter electricMeter, Charger charger) {
+        super(slot_no,vehicleType,floor);
         this.electricMeter = electricMeter;
         this.charger = charger;
     }

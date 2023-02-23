@@ -1,23 +1,24 @@
 package org.example.parkingLot.model;
 
+import org.example.parkingLot.model.enums.VehicleType;
+
 import java.util.List;
 import java.util.Map;
 
-public class ParkingLot {
+public class ParkingLot extends BaseModel{
     private List<Floor> floors;
     private List<Gate> gate;
     private String ownerName;
     private String parkingLotName;
-    private int id;
     private String address;
     private Map<VehicleType,Integer> basePay;
 
-    public ParkingLot(List<Floor> floors, List<Gate> gate, String owner, String name, int id, String address, Map<VehicleType, Integer> basePay) {
+    public ParkingLot(int id,List<Floor> floors, List<Gate> gate, String owner, String name,String address, Map<VehicleType, Integer> basePay) {
+        super(id);
         this.floors = floors;
         this.gate = gate;
         this.ownerName = owner;
         this.parkingLotName = name;
-        this.id = id;
         this.address = address;
         this.basePay = basePay;
     }
@@ -54,13 +55,6 @@ public class ParkingLot {
         this.parkingLotName = parkingLotName;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getAddress() {
         return address;

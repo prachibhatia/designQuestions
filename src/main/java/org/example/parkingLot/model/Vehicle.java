@@ -1,12 +1,15 @@
 package org.example.parkingLot.model;
 
-public class Vehicle {
+import org.example.parkingLot.model.enums.VehicleType;
+
+public class Vehicle extends BaseModel{
     private String vehicleNo;
     private VehicleType vehicleType;
     private String company;
     private String color;
 
-    public Vehicle(String vehicleNo, VehicleType vehicleType, String company, String color) {
+    public Vehicle(int id,String vehicleNo, VehicleType vehicleType, String company, String color) {
+        super(id);
         this.vehicleNo = vehicleNo;
         this.vehicleType = vehicleType;
         this.company = company;

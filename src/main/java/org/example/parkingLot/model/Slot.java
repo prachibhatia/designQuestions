@@ -1,25 +1,20 @@
 package org.example.parkingLot.model;
 
-public class Slot {
-    private int id;
+import org.example.parkingLot.model.enums.Status;
+import org.example.parkingLot.model.enums.VehicleType;
+
+public class Slot extends BaseModel{
     private int slot_no;
     private Status slot_status;
-    private Vehicle vehicle;
     private VehicleType vehicleType;
+    private Floor floor;
 
-    public Slot(int id, int slot_no, VehicleType vehicleType) {
-        this.id = id;
+    public Slot(int slot_no, VehicleType vehicleType,Floor floor) {
+        super(slot_no);
         this.slot_no = slot_no;
         this.slot_status = Status.EMPTY;
         this.vehicleType = vehicleType;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.floor = floor;
     }
 
     public int getSlot_no() {
@@ -30,6 +25,14 @@ public class Slot {
         this.slot_no = slot_no;
     }
 
+    public Floor getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Floor floor) {
+        this.floor = floor;
+    }
+
     public Status getSlot_status() {
         return slot_status;
     }
@@ -38,13 +41,6 @@ public class Slot {
         this.slot_status = slot_status;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
 
     public VehicleType getVehicleType() {
         return vehicleType;

@@ -1,10 +1,10 @@
 package org.example.parkingLot;
 
-import org.example.parkingLot.controllers.ParkingLotController;
+import org.example.parkingLot.controller.ParkingLotController;
 import org.example.parkingLot.model.Floor;
 import org.example.parkingLot.model.Gate;
 import org.example.parkingLot.model.Slot;
-import org.example.parkingLot.model.VehicleType;
+import org.example.parkingLot.model.enums.VehicleType;
 
 import java.util.*;
 
@@ -20,8 +20,6 @@ public class ParkingLot {
         List<Floor> floors = new ArrayList<>();
         System.out.println("Enter the name of the parking lot owner");
         String owner = s.next();
-        System.out.println("Enter parking lot's id");
-        int id = s.nextInt();
         System.out.println("Enter parking lot's address");
         String address = s.next();
 
@@ -30,12 +28,13 @@ public class ParkingLot {
             System.out.println("How many slots you need on "+ floor + "'st floor");
             int slotsSize = s.nextInt();
             List<Slot> slots = new ArrayList<>();
-            for(int j=0;j<slotsSize;j++){
-                slots.add(new Slot(j+1,j+1, VehicleType.CAR));
-            }
             System.out.println("Enter the "+ floor + "'st floor"+" manager name");
             String floorManagerName = s.next();
-            floors.add(new Floor(floor,slots,floorManagerName));
+            Floor f = new Floor(floor,slots,floorManagerName);
+            floors.add(f);
+            for(int j=0;j<slotsSize;j++){
+                slots.add(new Slot(j+1, VehicleType.CAR,f));
+            }
         }
 
         System.out.println("How many entry gates you want");
@@ -47,7 +46,7 @@ public class ParkingLot {
         List<Gate> gates = new ArrayList<>();
 
         Map<VehicleType,Integer> basePay = new HashMap<>();
-        parkingLotController.createParking(floors,gates,owner,"Parking Lot",id,address,basePay);
+        parkingLotController.createParking(1,floors,gates,owner,"Parking Lot",address,basePay);
         System.out.println("Parking Lot created! Start parking your cars");
 
         boolean isVehicle = true;

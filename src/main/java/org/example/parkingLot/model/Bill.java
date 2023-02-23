@@ -1,17 +1,18 @@
 package org.example.parkingLot.model;
 
-import java.sql.Time;
+import org.example.parkingLot.model.enums.BillStatus;
 
-public class Bill {
-    private int id;
+import java.sql.Date;
+
+public class Bill extends BaseModel{
     private Ticket ticket;
     private int amount;
-    private Time exitTime;
+    private Date exitTime;
     private String operatorName;
     private BillStatus billStatus;
 
-    public Bill(int id, Ticket ticket, int amount, Time exitTime, String operatorName, BillStatus billStatus) {
-        this.id = id;
+    public Bill(int id, Ticket ticket, int amount, Date exitTime, String operatorName, BillStatus billStatus) {
+        super(id);
         this.ticket = ticket;
         this.amount = amount;
         this.exitTime = exitTime;
@@ -19,13 +20,6 @@ public class Bill {
         this.billStatus = billStatus;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Ticket getTicket() {
         return ticket;
@@ -43,11 +37,11 @@ public class Bill {
         this.amount = amount;
     }
 
-    public Time getExitTime() {
+    public Date getExitTime() {
         return exitTime;
     }
 
-    public void setExitTime(Time exitTime) {
+    public void setExitTime(Date exitTime) {
         this.exitTime = exitTime;
     }
 

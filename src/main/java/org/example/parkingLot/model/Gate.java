@@ -1,27 +1,22 @@
 package org.example.parkingLot.model;
 
-public class Gate {
-    private int id;
+import org.example.parkingLot.model.enums.GateStatus;
+import org.example.parkingLot.model.enums.GateType;
+
+public class Gate extends BaseModel{
     private int gateNo;
     private String operatorName;
     private GateStatus gateStatus;
     private GateType gateType;
 
     public Gate(int id, int gateNo, String operatorName, GateStatus gateStatus, GateType gateType) {
-        this.id = id;
+        super(id);
         this.gateNo = gateNo;
         this.operatorName = operatorName;
         this.gateStatus = gateStatus;
         this.gateType = gateType;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getGateNo() {
         return gateNo;
