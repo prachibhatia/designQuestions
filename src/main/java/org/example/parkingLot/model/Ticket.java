@@ -1,30 +1,22 @@
 package org.example.parkingLot.model;
 
+import java.sql.Date;
 import java.sql.Time;
 
-public class Ticket {
-    private int id;
+public class Ticket extends BaseModel{
     private Vehicle vehicle;
-    private Time entryTime;
+    private Date entryTime;
     private Slot slot;
-    private Gate gate;
+    private Long gateId;
     private String operatorName;
 
-    public Ticket(int id, Vehicle vehicle, Time entryTime, Slot slot, Gate gate, String operatorName) {
-        this.id = id;
+    public Ticket(int id, Vehicle vehicle, Date entryTime, Slot slot, Long gateId, String operatorName) {
+        super(id);
         this.vehicle = vehicle;
         this.entryTime = entryTime;
         this.slot = slot;
-        this.gate = gate;
+        this.gateId = gateId;
         this.operatorName = operatorName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Vehicle getVehicle() {
@@ -35,11 +27,11 @@ public class Ticket {
         this.vehicle = vehicle;
     }
 
-    public Time getEntryTime() {
+    public Date getEntryTime() {
         return entryTime;
     }
 
-    public void setEntryTime(Time entryTime) {
+    public void setEntryTime(Date entryTime) {
         this.entryTime = entryTime;
     }
 
@@ -51,12 +43,12 @@ public class Ticket {
         this.slot = slot;
     }
 
-    public Gate getGate() {
-        return gate;
+    public Long getGateId() {
+        return gateId;
     }
 
-    public void setGate(Gate gate) {
-        this.gate = gate;
+    public void setGateId(Long gateId) {
+        this.gateId = gateId;
     }
 
     public String getOperatorName() {

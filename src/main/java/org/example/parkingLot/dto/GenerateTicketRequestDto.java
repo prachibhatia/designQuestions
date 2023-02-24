@@ -6,7 +6,14 @@ public class GenerateTicketRequestDto {
     private Long gateId;
     private String vehicleNumber;
     private VehicleType vehicleType;
+    private long parkingLotId;
 
+    public long getParkingLotId() {
+        return parkingLotId;
+    }
+    public void setParkingLotId(Long parkingLotId) {
+        this.parkingLotId = parkingLotId;
+    }
     public Long getGateId() {
         return gateId;
     }

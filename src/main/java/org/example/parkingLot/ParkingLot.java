@@ -46,7 +46,7 @@ public class ParkingLot {
         List<Gate> gates = new ArrayList<>();
 
         Map<VehicleType,Integer> basePay = new HashMap<>();
-        parkingLotController.createParking(1,floors,gates,owner,"Parking Lot",address,basePay);
+        parkingLotController.createParkingLot(1,floors,gates,owner,"Parking Lot",address,basePay);
         System.out.println("Parking Lot created! Start parking your cars");
 
         boolean isVehicle = true;
