@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 public class TicketService {
     private TicketRepository ticketRepository;
-    private ParkingSpotService parkingSpotService;
+    private ParkingSlotService parkingSpotService;
     private GateService gateService;
     private VehicleService vehicleService;
     public Ticket createTicket(GenerateTicketRequestDto request){

@@ -1,6 +1,7 @@
 package org.example.parkingLot;
 
 import org.example.parkingLot.controller.ParkingLotController;
+import org.example.parkingLot.dto.GenerateParkingLotRequestDto;
 import org.example.parkingLot.model.Floor;
 import org.example.parkingLot.model.Gate;
 import org.example.parkingLot.model.Slot;
@@ -17,25 +18,12 @@ public class ParkingLot {
         System.out.println("Welcome to the parking lot!");
         System.out.println("How many floors you need ?");
         int floorsSize = s.nextInt();
-        List<Floor> floors = new ArrayList<>();
-        System.out.println("Enter the name of the parking lot owner");
-        String owner = s.next();
+        System.out.println("Enter the name of the parking lot");
+        String parkingLot = s.next();
         System.out.println("Enter parking lot's address");
         String address = s.next();
-
-        for(int i=0;i<floorsSize;i++){
-            int floor = i+1;
-            System.out.println("How many slots you need on "+ floor + "'st floor");
-            int slotsSize = s.nextInt();
-            List<Slot> slots = new ArrayList<>();
-            System.out.println("Enter the "+ floor + "'st floor"+" manager name");
-            String floorManagerName = s.next();
-            Floor f = new Floor(floor,slots,floorManagerName);
-            floors.add(f);
-            for(int j=0;j<slotsSize;j++){
-                slots.add(new Slot(j+1, VehicleType.CAR,f));
-            }
-        }
+        System.out.println("How many slots you need on each floor");
+        int slotsSize = s.nextInt();
 
         System.out.println("How many entry gates you want");
         int entryGatesCount = s.nextInt();
@@ -43,10 +31,8 @@ public class ParkingLot {
         System.out.println("How many exit gates you want");
         int exitGatesCount = s.nextInt();
 
-        List<Gate> gates = new ArrayList<>();
-
-        Map<VehicleType,Integer> basePay = new HashMap<>();
-        parkingLotController.createParkingLot(1,floors,gates,owner,"Parking Lot",address,basePay);
+        GenerateParkingLotRequestDto parkingLotRequestDto = new GenerateParkingLotRequestDto((long)1,floorsSize,parkingLot,address,entryGatesCount,exitGatesCount,slotsSize);
+        parkingLotController.createParkingLot(parkingLotRequestDto);
         System.out.println("Parking Lot created! Start parking your cars");
 
         boolean isVehicle = true;

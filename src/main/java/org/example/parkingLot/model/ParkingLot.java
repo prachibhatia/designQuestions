@@ -8,16 +8,14 @@ import java.util.Map;
 public class ParkingLot extends BaseModel{
     private List<Floor> floors;
     private List<Gate> gate;
-    private String ownerName;
     private String parkingLotName;
     private String address;
     private Map<VehicleType,Integer> basePay;
 
-    public ParkingLot(int id,List<Floor> floors, List<Gate> gate, String owner, String name,String address, Map<VehicleType, Integer> basePay) {
+    public ParkingLot(long id,List<Floor> floors, List<Gate> gate, String name,String address, Map<VehicleType, Integer> basePay) {
         super(id);
         this.floors = floors;
         this.gate = gate;
-        this.ownerName = owner;
         this.parkingLotName = name;
         this.address = address;
         this.basePay = basePay;
@@ -37,14 +35,6 @@ public class ParkingLot extends BaseModel{
 
     public void setGate(List<Gate> gate) {
         this.gate = gate;
-    }
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
     }
 
     public String getParkingLotName() {
