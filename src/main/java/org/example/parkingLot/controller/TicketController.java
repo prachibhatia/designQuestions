@@ -6,6 +6,11 @@ import org.example.parkingLot.service.TicketService;
 
 public class TicketController {
     private TicketService ticketService;
+
+    public TicketController(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+
     public Ticket createTicket(GenerateTicketRequestDto request) {
         return ticketService.createTicket(request);
     }

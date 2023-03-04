@@ -7,7 +7,7 @@ import java.util.List;
 
 public class GateRepository {
     private List<Gate> gates = new ArrayList<>();
-    public Gate getGateById(Long gateId){
+    public Gate getGateById(long gateId){
         return gates.stream().filter(gate -> gate.getId()==gateId).findFirst().orElse(null);
     }
 }
